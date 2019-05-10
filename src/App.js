@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getCards, postCards, setLocal, getLocal } from './services';
+import { getCards, postCard, setLocal, getLocal } from './services';
 import CardList from './CardList';
 import Form from './Form';
 
@@ -15,7 +15,7 @@ export default class App extends Component {
   }
 
   createCard = (title, description, tags) => {
-    postCards({ title, description, tags })
+    postCard({ title, description, tags })
       .then(card => {
         this.state.cards.push(card);
         this.setState({ cards: this.state.cards });
@@ -38,16 +38,7 @@ export default class App extends Component {
 }
 
 /* 
-Backend: enhance model and add PATCH
-
-Add a boolean property bookmarked to your cardSchema with a default value of false
-
-Add a patch method to your server in order to be able to update a card
-
-
 Frontend: Update Card (Advanced)
-
-Add a text to each card that says bookmark or bookmarked depending on the card data
 Add a new method patchCard to services
 
 Use that on click on bookmark to toggle the bookmark-state on the server

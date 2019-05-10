@@ -2,10 +2,23 @@ export function getCards() {
   return fetch('/cards').then(res => res.json());
 }
 
-export function postCards(card) {
+export function postCard(card) {
   const { title, description, tags } = card;
   return fetch('/cards', {
     method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      title,
+      description,
+      tags
+    })
+  }).then(res => res.json());
+}
+
+export function updateCard(card) {
+  const { title, description, tags } = card;
+  return fetch('/cards', {
+    method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       title,

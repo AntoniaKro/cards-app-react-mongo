@@ -11,6 +11,7 @@ function Card(props) {
           <Tag key={tag} tag={tag} />
         ))}
       </ul>
+      {props.card.bookmark && <button>BOOKMARKED</button>}
     </li>
   );
 }
