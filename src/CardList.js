@@ -1,10 +1,15 @@
 import React from 'react';
 import Card from './Card';
+import styled from 'styled-components';
 
 function CardList(props) {
+  const Cards = styled.ul`
+    margin: 20px;
+    padding: 0;
+  `;
   return (
     <React.Fragment>
-      <ul>
+      <Cards>
         {props.cards.map(card => (
           <Card
             card={card}
@@ -12,7 +17,7 @@ function CardList(props) {
             onClick={() => props.onClick(card)}
           />
         ))}
-      </ul>
+      </Cards>
     </React.Fragment>
   );
 }

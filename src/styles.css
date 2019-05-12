@@ -6,6 +6,11 @@ body {
   margin: 0;
   padding: 20px;
   font-family: sans-serif;
-  color: darkslategray;
-  background: papayawhip;
+  color: rgb(13, 22, 17);
+  background: rgb(253, 253, 253);
+}
+
+h1 {
+  font-family: monospace;
+  font-size: 35px;
 }
