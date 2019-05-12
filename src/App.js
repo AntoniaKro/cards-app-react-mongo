@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getCards, postCard, setLocal, getLocal } from './services';
+import { getCards, postCard, setLocal, getLocal, updateCard } from './services';
 import CardList from './CardList';
 import Form from './Form';
 
@@ -23,6 +23,22 @@ export default class App extends Component {
       .catch(err => console.log(err));
   };
 
+  handleBookmarkClick = card => {
+    card.bookmark = !card.bookmark;
+    const index = this.state.cards.indexOf(card);
+    updateCard(card)
+      .then(card => {
+        this.setState({
+          cards: [
+            ...this.state.cards.slice(0, index),
+            card,
+            ...this.state.cards.slice(index + 1)
+          ]
+        });
+      })
+      .catch(err => console.log(err));
+  };
+
   render() {
     const { cards } = this.state;
     setLocal(cards);
@@ -31,7 +47,7 @@ export default class App extends Component {
       <main>
         <h1>Cards</h1>
         <Form onSubmit={this.createCard} />
-        <CardList cards={cards} />
+        <CardList cards={cards} onClick={this.handleBookmarkClick} />
       </main>
     );
   }
@@ -39,7 +55,6 @@ export default class App extends Component {
 
 /* 
 Frontend: Update Card (Advanced)
-Add a new method patchCard to services
 
 Use that on click on bookmark to toggle the bookmark-state on the server
 When the server responds, update the card in your state */

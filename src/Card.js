@@ -11,11 +11,9 @@ function Card(props) {
           <Tag key={tag} tag={tag} />
         ))}
       </ul>
-      {props.card.bookmark ? (
-        <button>BOOKMARKED</button>
-      ) : (
-        <button>BOOKMARK</button>
-      )}
+      <button onClick={props.onClick}>
+        {props.card.bookmark ? 'BOOKMARKED' : 'BOOKMARK'}
+      </button>
     </li>
   );
 }

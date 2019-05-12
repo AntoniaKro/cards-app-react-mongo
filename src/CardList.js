@@ -1,12 +1,16 @@
 import React from 'react';
 import Card from './Card';
 
-function CardList({ cards }) {
+function CardList(props) {
   return (
     <React.Fragment>
       <ul>
-        {cards.map(card => (
-          <Card card={card} key={card._id} />
+        {props.cards.map(card => (
+          <Card
+            card={card}
+            key={card._id}
+            onClick={() => props.onClick(card)}
+          />
         ))}
       </ul>
     </React.Fragment>
