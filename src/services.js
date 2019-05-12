@@ -16,14 +16,15 @@ export function postCard(card) {
 }
 
 export function updateCard(card) {
-  const { title, description, tags } = card;
-  return fetch('/cards', {
+  const { title, description, tags, bookmark, _id } = card;
+  return fetch(`/cards/${_id}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       title,
       description,
-      tags
+      tags,
+      bookmark
     })
   }).then(res => res.json());
 }
