@@ -25,10 +25,14 @@ function Form({ onSubmit }) {
   `;
 
   function handleSubmit(event) {
+    // Destructering: const { title, description, tags} = event.target;
+    // const form = event.target;
+    // const form = event.target;
+    // const {target: form} = event;
     event.preventDefault();
     const title = event.target.title.value;
     const description = event.target.description.value;
-    const tags = event.target.tags.value.split(' ');
+    const tags = event.target.tags.value.split(' '); //.map(value=>value.trim()).filter(value => Boolean(value)) noch anfügen oder .filter(Boolean)
 
     onSubmit(title, description, tags);
   }

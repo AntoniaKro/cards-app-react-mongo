@@ -14,7 +14,7 @@ function CardList(props) {
           <Card
             card={card}
             key={card._id}
-            onClick={() => props.onClick(card)}
+            onClick={() => props.onClick(card)} //besserer Name für props.onClick --> onBookmark
           />
         ))}
       </Cards>

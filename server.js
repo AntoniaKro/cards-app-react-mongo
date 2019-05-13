@@ -19,5 +19,5 @@ app.patch('/cards/:id', function(req, res) {
   const id = req.params.id;
   Card.findByIdAndUpdate(id, req.body, { new: true })
     .then(card => res.json(card))
-    .catch(err => console.log(err));
+    .catch(err => res.json(err));
 });

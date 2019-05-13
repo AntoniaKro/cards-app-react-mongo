@@ -12,6 +12,7 @@ const cardSchema = new mongoose.Schema({
   },
   tags: {
     type: [String]
+    // set: value => value.toLowerCase()
   },
   bookmark: { type: Boolean, default: false }
 });

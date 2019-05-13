@@ -15,18 +15,26 @@ export default class App extends Component {
   }
 
   createCard = (title, description, tags) => {
+    //this.setState.. optimistic Update
     postCard({ title, description, tags })
       .then(card => {
         this.state.cards.push(card);
-        this.setState({ cards: this.state.cards });
+        this.setState({ cards: this.state.cards }); //pessimistic Update
       })
       .catch(err => console.log(err));
   };
 
+  componentDidUpdate(prevProps, prevState) {
+    const { cards } = this.state;
+    if (prevState.cards !== cards) {
+      setLocal('cards', cards);
+    }
+  }
+
   handleBookmarkClick = card => {
     card.bookmark = !card.bookmark;
     const index = this.state.cards.indexOf(card);
-    updateCard(card)
+    updateCard(card) // auch möglich nur den geänderten Teil mitzuschicken, dann brauch es aber die id zusätzlich und in der sevices muss die Funktion angepasst werden,  updateCard({card.bookmark = !card.bookmark}, card._id)
       .then(card => {
         this.setState({
           cards: [
@@ -41,7 +49,6 @@ export default class App extends Component {
 
   render() {
     const { cards } = this.state;
-    setLocal(cards);
 
     return (
       <main>
