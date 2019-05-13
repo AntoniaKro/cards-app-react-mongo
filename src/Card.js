@@ -5,11 +5,11 @@ import styled from 'styled-components';
 function Card(props) {
   const CardListItem = styled.li`
     list-style: none;
-    border: 2px solid white;
-    padding: 10px;
+    padding: 0 20px;
     margin: 5px;
     border-radius: 5px;
     background: rgb(232, 236, 235);
+    box-shadow: 10px 5px 32px -12px rgb(205, 212, 209);
   `;
 
   const Title = styled.p`
@@ -37,7 +37,6 @@ function Card(props) {
     color: white;
     border-radius: 5px;
   `;
-
   return (
     <CardListItem>
       <Title>{props.card.title}</Title>
