@@ -1,11 +1,34 @@
 import React, { Component } from 'react';
-import { getCards, postCard, setLocal, getLocal, updateCard } from './services';
+import { getCards, postCard, updateCard } from './services';
 import CardList from './CardList';
 import Form from './Form';
+import Navbar from './Navbar';
+import styled from 'styled-components';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-rows: 80px auto 40px;
+  text-align: center;
+  height: 100vh;
+`;
+
+const Header = styled.h1`
+  grid-row: 1;
+`;
+
+const Main = styled.main`
+  overflow: scroll;
+`;
+
+const StyledNavbar = styled(Navbar)`
+  grid-row: 3;
+  display: flex;
+`;
 
 export default class App extends Component {
   state = {
-    cards: getLocal() || []
+    cards: []
   };
 
   componentDidMount() {
@@ -25,13 +48,6 @@ export default class App extends Component {
       })
       .catch(err => console.log(err));
   };
-
-  componentDidUpdate(prevProps, prevState) {
-    const { cards } = this.state;
-    if (prevState.cards !== cards) {
-      setLocal('cards', cards);
-    }
-  }
 
   handleBookmarkClick = card => {
     card.bookmark = !card.bookmark;
@@ -53,11 +69,18 @@ export default class App extends Component {
     const { cards } = this.state;
 
     return (
-      <main>
-        <h1>Cards</h1>
-        <Form onSubmit={this.createCard} />
-        <CardList cards={cards} onClick={this.handleBookmarkClick} />
-      </main>
+      <BrowserRouter>
+        <Grid>
+          <Header>Cards</Header>
+          <Main>
+            <Switch>
+              <Form onSubmit={this.createCard} />
+              <CardList cards={cards} onClick={this.handleBookmarkClick} />
+            </Switch>
+          </Main>
+          <StyledNavbar />
+        </Grid>
+      </BrowserRouter>
     );
   }
 }

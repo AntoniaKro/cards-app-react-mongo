@@ -8,17 +8,15 @@ function CardList(props) {
     padding: 0;
   `;
   return (
-    <React.Fragment>
-      <Cards>
-        {props.cards.map(card => (
-          <Card
-            card={card}
-            key={card._id}
-            onClick={() => props.onClick(card)} //besserer Name für props.onClick --> onBookmark
-          />
-        ))}
-      </Cards>
-    </React.Fragment>
+    <Cards>
+      {props.cards.map(card => (
+        <Card
+          card={card}
+          key={card._id}
+          onClick={() => props.onClick(card)} //besserer Name für props.onClick --> onBookmark
+        />
+      ))}
+    </Cards>
   );
 }
 
