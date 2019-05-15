@@ -15,7 +15,9 @@ export default class App extends Component {
   }
 
   createCard = (title, description, tags) => {
-    //this.setState.. optimistic Update
+    /*  const newCard = {title, description, tags}
+    this.state.cards.push(newCard);
+    this.setState({cards: this.state.cards}) ... optimistic Update*/
     postCard({ title, description, tags })
       .then(card => {
         this.state.cards.push(card);
@@ -59,9 +61,3 @@ export default class App extends Component {
     );
   }
 }
-
-/* 
-Frontend: Update Card (Advanced)
-
-Use that on click on bookmark to toggle the bookmark-state on the server
-When the server responds, update the card in your state */
