@@ -74,7 +74,10 @@ export default class App extends Component {
           <Header>Cards</Header>
           <Main>
             <Switch>
-              <Form onSubmit={this.createCard} />
+              <Route
+                path="/create"
+                render={props => <Form onSubmit={this.createCard} {...props} />}
+              />
               <CardList cards={cards} onClick={this.handleBookmarkClick} />
             </Switch>
           </Main>
