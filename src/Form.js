@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function Form({ onSubmit }) {
+function Form({ onSubmit, history }) {
   const StyledForm = styled.form`
     padding: 15px;
     display: flex;
@@ -33,8 +33,8 @@ function Form({ onSubmit }) {
     const title = event.target.title.value;
     const description = event.target.description.value;
     const tags = event.target.tags.value.split(' '); //.map(value=>value.trim()).filter(value => Boolean(value)) noch anfügen oder .filter(Boolean)
-
     onSubmit(title, description, tags);
+    history.push('/');
   }
 
   return (

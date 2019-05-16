@@ -3,27 +3,37 @@ import { getCards, postCard, updateCard } from './services';
 import CardList from './CardList';
 import Form from './Form';
 import Navbar from './Navbar';
-import styled from 'styled-components';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import styled, { createGlobalStyle } from 'styled-components';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+const GlobalStyles = createGlobalStyle`
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+`;
 
 const Grid = styled.div`
   display: grid;
-  grid-template-rows: 80px auto 40px;
+  grid-template-rows: 80px auto 80px;
   text-align: center;
   height: 100vh;
 `;
 
 const Header = styled.h1`
   grid-row: 1;
+  font-family: monospace;
+  font-size: 40px;
+  margin: auto;
 `;
 
 const Main = styled.main`
   overflow: scroll;
-`;
-
-const StyledNavbar = styled(Navbar)`
-  grid-row: 3;
-  display: flex;
 `;
 
 export default class App extends Component {
@@ -69,8 +79,9 @@ export default class App extends Component {
     const { cards } = this.state;
 
     return (
-      <BrowserRouter>
-        <Grid>
+      <Grid>
+        <BrowserRouter>
+          <GlobalStyles />
           <Header>Cards</Header>
           <Main>
             <Switch>
@@ -78,12 +89,22 @@ export default class App extends Component {
                 path="/create"
                 render={props => <Form onSubmit={this.createCard} {...props} />}
               />
-              <CardList cards={cards} onClick={this.handleBookmarkClick} />
+              <Route
+                exact
+                path="/"
+                render={props => (
+                  <CardList
+                    cards={cards}
+                    onClick={this.handleBookmarkClick}
+                    {...props}
+                  />
+                )}
+              />
             </Switch>
           </Main>
-          <StyledNavbar />
-        </Grid>
-      </BrowserRouter>
+          <Navbar />
+        </BrowserRouter>
+      </Grid>
     );
   }
 }
