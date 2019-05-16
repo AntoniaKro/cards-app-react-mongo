@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { getCards, postCard, updateCard } from '../services';
-import CardList from '../cards/CardList';
-import Form from '../create/Form';
+import CardPage from '../cards/CardPage';
 import Navbar from '../navigation/Navbar';
 import styled, { createGlobalStyle } from 'styled-components';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import FormPage from '../create/FormPage';
 
 const GlobalStyles = createGlobalStyle`
 * {
@@ -45,7 +45,7 @@ function App() {
       .catch(error => console.log(error));
   }, []);
 
-  function createCard(title, description, tags) {
+  function handleCreateCard(title, description, tags) {
     /*  const newCard = {title, description, tags}
     this.state.cards.push(newCard);
     this.setState({cards: this.state.cards}) ... optimistic Update*/
@@ -75,17 +75,15 @@ function App() {
           <Switch>
             <Route
               path="/create"
-              render={props => <Form onSubmit={createCard} {...props} />}
+              render={props => (
+                <FormPage onCreateCard={handleCreateCard} {...props} />
+              )}
             />
             <Route
               exact
               path="/"
               render={props => (
-                <CardList
-                  cards={cards}
-                  onClick={handleBookmarkClick}
-                  {...props}
-                />
+                <CardPage cards={cards} onBookmarkClick={handleBookmarkClick} />
               )}
             />
           </Switch>

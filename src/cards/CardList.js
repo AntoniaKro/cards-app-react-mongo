@@ -2,18 +2,18 @@ import React from 'react';
 import Card from './Card';
 import styled from 'styled-components';
 
-function CardList(props) {
-  const Cards = styled.ul`
-    margin: 20px;
-    padding: 0;
-  `;
+const Cards = styled.ul`
+  margin: 20px;
+  padding: 0;
+`;
+function CardList({ cards, onBookmarkClick }) {
   return (
     <Cards>
-      {props.cards.map(card => (
+      {cards.map(card => (
         <Card
           card={card}
           key={card._id}
-          onClick={() => props.onClick(card)} //besserer Name für props.onClick --> onBookmark
+          onClick={() => onBookmarkClick(card)}
         />
       ))}
     </Cards>
